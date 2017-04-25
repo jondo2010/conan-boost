@@ -4,8 +4,8 @@ import os
 import sys
 
 ############### CONFIGURE THESE VALUES ##################
-default_user = "lasote"
-default_channel = "testing"
+default_user = "johughes"
+default_channel = "release"
 #########################################################
 
 channel = os.getenv("CONAN_CHANNEL", default_channel)
@@ -15,7 +15,7 @@ class DefaultNameConan(ConanFile):
     name = "DefaultName"
     version = "0.1"
     settings = "os", "compiler", "arch", "build_type"
-    requires = "Boost/1.62.0@%s/%s" % (username, channel)
+    requires = "Boost/1.64.0@%s/%s" % (username, channel)
     generators = "cmake"
 
     def config(self):

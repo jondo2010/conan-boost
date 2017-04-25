@@ -5,7 +5,7 @@ import platform, os, sys
 
 class BoostConan(ConanFile):
     name = "Boost"
-    version = "1.62.0"
+    version = "1.64.0"
     settings = "os", "arch", "compiler", "build_type"
     FOLDER_NAME = "boost_%s" % version.replace(".", "_")
     # The current python option requires the package to be built locally, to find default Python implementation
@@ -43,9 +43,9 @@ class BoostConan(ConanFile):
         "without_wave": [True, False]
     }
 
-    default_options = "shared=False", \
+    default_options = "shared=True", \
         "header_only=False", \
-        "fPIC=False", \
+        "fPIC=True", \
         "python=False", \
         "without_atomic=False", \
         "without_chrono=False", \
@@ -75,7 +75,7 @@ class BoostConan(ConanFile):
         "without_type_erasure=False", \
         "without_wave=False"
 
-    url="https://github.com/lasote/conan-boost"
+    url="https://github.com/jondo2010/conan-boost"
     exports = ["FindBoost.cmake", "OriginalFindBoost*"]
     license="Boost Software License - Version 1.0. http://www.boost.org/LICENSE_1_0.txt"
     short_paths = True
@@ -268,7 +268,8 @@ class BoostConan(ConanFile):
         if self.options.header_only:
             return
 
-        libs = ("wave unit_test_framework prg_exec_monitor test_exec_monitor container exception "
+        libs = ("fiber process qvm compute hana dll "
+                "wave unit_test_framework prg_exec_monitor test_exec_monitor container exception "
                 "graph iostreams locale log log_setup math_c99 math_c99f math_c99l math_tr1 "
                 "math_tr1f math_tr1l program_options random regex wserialization serialization "
                 "signals coroutine context timer thread chrono date_time atomic filesystem system").split()
